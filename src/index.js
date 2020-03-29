@@ -3,11 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-
+import {createStore} from "redux";
+import MovieApp from './reducers'
+import {Provider} from 'react-redux'
+import {applyMiddleware} from "redux";
+import {createLogger} from "redux-logger/src";
+import ReduxThunk from 'redux-thunk'
+const logger=createLogger()
+const store=createStore(MovieApp,applyMiddleware(logger,ReduxThunk))
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store}>
+      <App />
+  </Provider>,
   document.getElementById('root')
 );
 
